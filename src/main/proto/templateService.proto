@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package com.example.grpctest1;
+
+option java_multiple_files = true;
+option java_package = "com.example.grpctest1";
+
+service TemplateService {
+  rpc getEmailTemplate(TemplateRequest) returns (TemplateResponse) {}
+  rpc getNotificationTemplate(TemplateRequest) returns (TemplateResponse) {}
+}
+
+message TemplateRequest {
+  string templateCode = 1;
+  int64 studentUserid = 2;
+  int64 staffUserid = 3;
+  string option = 4;
+}
+
+message TemplateResponse {
+  string content = 1;
+  string notificationTo = 2;
+}
