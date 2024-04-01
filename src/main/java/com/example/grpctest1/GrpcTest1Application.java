@@ -6,7 +6,9 @@ import com.example.grpctest1.service.TemplateServiceImp;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
+import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.serverfactory.GrpcServerConfigurer;
+import org.apache.catalina.startup.Tomcat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,25 +18,12 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
+@Slf4j
 public class GrpcTest1Application {
     @Autowired
     private static TemplateServiceImp templateServiceImp;
     public static void main(String[] args) {
         SpringApplication.run(GrpcTest1Application.class, args);
-
-//        try {
-//            /* *
-//             * Do not forget to install maven. The grpc stub classes are generated when you run the protoc compiler
-//             * and it finds a service declaration in your proto file.
-//             * Do not forget the client must use the same port in order to connect to this server.
-//             * */
-//            Server server = ServerBuilder.forPort(8999).addService(templateServiceImp).build();
-//
-//            server.start();
-//            server.awaitTermination();
-//        } catch (IOException | InterruptedException e) {
-//            System.out.println("Error: " + e);
-//        }
     }
     @Bean
     public GrpcServerConfigurer keepAliveServerConfigurer() {
