@@ -35,6 +35,7 @@ public class TemplateServiceImp extends TemplateServiceGrpc.TemplateServiceImplB
                 .setContent(template.getTemplateContent().replace("[Student Name]", studentName)
                         .replace("[Name]", staff.getFirstName() + " " + student.getLastName())
                         .replace("[Role]", staff.getRole().name()))
+                .setNotificationTo(student.getEmail())
                 .build();
         responseObserver.onNext(templateResponse);
         responseObserver.onCompleted();
@@ -44,12 +45,6 @@ public class TemplateServiceImp extends TemplateServiceGrpc.TemplateServiceImplB
     public void getNotificationTemplate(TemplateRequest request, StreamObserver<TemplateResponse> responseObserver) {
         Template template = templateRepository.findByTemplateCode(request.getTemplateCode());
         String content = template.getTemplateContent().replace("[choose appropriate option]", request.getOption());
-        Notification notification = new Notification();
-        notification.setContent(content);
-        notification.setSeen(false);
-        notification.setCreatedAt(localDateTime);
-        notification.setUser(userRepository.findById(request.getStudentUserid()).orElseThrow());
-        notificationRepository.save(notification);
         TemplateResponse templateResponse = TemplateResponse.newBuilder()
                 .setContent(content)
                 .build();

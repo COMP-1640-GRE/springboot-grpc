@@ -6,40 +6,30 @@ option java_multiple_files = true;
 option java_package = "com.example.grpctest1";
 
 service NotificationService {
-  rpc sendEmail(EmailRequest) returns (EmailResponse) {}
-  rpc createNotification(NotificationRequest) returns (NotificationResponse) {}
-  rpc getListNotifications(ListNotificationRequest) returns (ListNotificationResponse) {}
+  rpc sendNotification(NotificationRequest) returns (NotificationResponse) {}
+  rpc getListNotifications(ListNotificationRequest) returns (stream NotificationResponse) {}
 }
 
-message EmailRequest {
+message NotificationRequest {
   string templateCode = 1;
   int64 studentUserid = 2;
   int64 staffUserid = 3;
   string option = 4;
-}
-
-message EmailResponse {
-  string content = 1;
-  string notificationTo = 2;
-}
-
-message NotificationRequest{
-  string templateCode = 1;
-  int64 studentUserid = 2;
-  string option = 3;
+  bool withEmail = 5;
 }
 
 message NotificationResponse {
-  string content = 1;
-  string notificationTo = 2;
+  int64 id = 1;
+  int64 studentUserid = 2;
+  string content = 3;
+  string url = 4;
+  bool seen = 5;
+  bool withEmail = 6;
 }
 
 message ListNotificationRequest {
   int32 page = 1;
   int32 pageSize = 2;
   int64 studentUserid = 3;
-}
-
-message ListNotificationResponse {
-  string content = 1;
+  bool seen = 4;
 }

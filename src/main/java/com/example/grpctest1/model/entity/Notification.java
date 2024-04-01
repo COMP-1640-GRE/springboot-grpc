@@ -8,7 +8,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user", schema = "public")
+@Table(name = "notification", schema = "public")
 @Data
 @Getter
 @Setter
@@ -29,8 +29,8 @@ public class Notification {
     private User user;
 
     @Basic
-    @Column(name = "notification_type")
-    private String notificationType;
+    @Column(name = "with_email")
+    private boolean withEmail;
 
     @Basic
     @Column(name = "content")
