@@ -24,16 +24,17 @@ public class GrpcTest1Application {
     private static TemplateServiceImp templateServiceImp;
     public static void main(String[] args) {
         SpringApplication.run(GrpcTest1Application.class, args);
+        log.info("gRPC server started");
     }
-    @Bean
-    public GrpcServerConfigurer keepAliveServerConfigurer() {
-        return serverBuilder -> {
-            if (serverBuilder instanceof NettyServerBuilder) {
-                ((NettyServerBuilder) serverBuilder)
-                        .keepAliveTime(30, TimeUnit.SECONDS)
-                        .keepAliveTimeout(5, TimeUnit.SECONDS)
-                        .permitKeepAliveWithoutCalls(true);
-            }
-        };
-    }
+//    @Bean
+//    public GrpcServerConfigurer keepAliveServerConfigurer() {
+//        return serverBuilder -> {
+//            if (serverBuilder instanceof NettyServerBuilder) {
+//                ((NettyServerBuilder) serverBuilder)
+//                        .keepAliveTime(30, TimeUnit.SECONDS)
+//                        .keepAliveTimeout(5, TimeUnit.SECONDS)
+//                        .permitKeepAliveWithoutCalls(true);
+//            }
+//        };
+//    }
 }
