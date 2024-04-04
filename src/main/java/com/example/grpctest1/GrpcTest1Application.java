@@ -23,7 +23,9 @@ public class GrpcTest1Application {
     @Autowired
     private static TemplateServiceImp templateServiceImp;
     public static void main(String[] args) {
+        System.out.println("Hello World");
         SpringApplication.run(GrpcTest1Application.class, args);
+
         log.info("gRPC server started");
     }
 //    @Bean
